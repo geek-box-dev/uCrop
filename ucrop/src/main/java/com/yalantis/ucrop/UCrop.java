@@ -34,7 +34,7 @@ public class UCrop {
 
     public static final int REQUEST_CROP = 69;
     public static final int RESULT_ERROR = 96;
-    public static final int MIN_SIZE = 10;
+    public static final int MIN_SIZE = 5;
 
     private static final String EXTRA_PREFIX = BuildConfig.LIBRARY_PACKAGE_NAME;
 
@@ -57,7 +57,8 @@ public class UCrop {
     private Bundle mCropOptionsBundle;
 
     /**
-     * This method creates new Intent builder and sets both source and destination image URIs.
+     * This method creates new Intent builder and sets both source and destination
+     * image URIs.
      *
      * @param source      Uri for image to crop
      * @param destination Uri for saving the cropped image
@@ -87,7 +88,8 @@ public class UCrop {
     }
 
     /**
-     * Set an aspect ratio for crop bounds that is evaluated from source image width and height.
+     * Set an aspect ratio for crop bounds that is evaluated from source image width
+     * and height.
      * User won't see the menu with other ratios options.
      */
     public UCrop useSourceImageAspectRatio() {
@@ -97,7 +99,8 @@ public class UCrop {
     }
 
     /**
-     * Set maximum size for result cropped image. Maximum size cannot be less then {@value MIN_SIZE}
+     * Set maximum size for result cropped image. Maximum size cannot be less then
+     * {@value MIN_SIZE}
      *
      * @param width  max cropped image width
      * @param height max cropped image height
@@ -182,10 +185,11 @@ public class UCrop {
     /**
      * Send the crop Intent
      *
-     * @param activityResultLauncher used to launch {@link UCropActivity} and receive a result
+     * @param activityResultLauncher used to launch {@link UCropActivity} and
+     *                               receive a result
      */
     public void start(@NonNull Context context,
-                      @NonNull ActivityResultLauncher<Intent> activityResultLauncher) {
+            @NonNull ActivityResultLauncher<Intent> activityResultLauncher) {
         activityResultLauncher.launch(getIntent(context));
     }
 
@@ -246,7 +250,8 @@ public class UCrop {
      * Retrieve cropped image aspect ratio from the result Intent
      *
      * @param intent crop result intent
-     * @return aspect ratio as a floating point value (x:y) - so it will be 1 for 1:1 or 4/3 for 4:3
+     * @return aspect ratio as a floating point value (x:y) - so it will be 1 for
+     *         1:1 or 4/3 for 4:3
      */
     public static float getOutputCropAspectRatio(@NonNull Intent intent) {
         return intent.getFloatExtra(EXTRA_OUTPUT_CROP_ASPECT_RATIO, 0f);
@@ -263,7 +268,6 @@ public class UCrop {
         return (Throwable) result.getSerializableExtra(EXTRA_ERROR);
     }
 
-
     /**
      * Class that helps to setup advanced configs that are not commonly used.
      * Use it with method {@link #withOptions(Options)}
@@ -277,7 +281,8 @@ public class UCrop {
 
         public static final String EXTRA_MAX_BITMAP_SIZE = EXTRA_PREFIX + ".MaxBitmapSize";
         public static final String EXTRA_MAX_SCALE_MULTIPLIER = EXTRA_PREFIX + ".MaxScaleMultiplier";
-        public static final String EXTRA_IMAGE_TO_CROP_BOUNDS_ANIM_DURATION = EXTRA_PREFIX + ".ImageToCropBoundsAnimDuration";
+        public static final String EXTRA_IMAGE_TO_CROP_BOUNDS_ANIM_DURATION = EXTRA_PREFIX
+                + ".ImageToCropBoundsAnimDuration";
 
         public static final String EXTRA_DIMMED_LAYER_COLOR = EXTRA_PREFIX + ".DimmedLayerColor";
         public static final String EXTRA_CIRCLE_DIMMED_LAYER = EXTRA_PREFIX + ".CircleDimmedLayer";
@@ -296,7 +301,8 @@ public class UCrop {
         public static final String EXTRA_TOOL_BAR_COLOR = EXTRA_PREFIX + ".ToolbarColor";
         public static final String EXTRA_STATUS_BAR_LIGHT = EXTRA_PREFIX + ".StatusBarLight";
         public static final String EXTRA_NAVIGATION_BAR_LIGHT = EXTRA_PREFIX + ".NavigationBarLight";
-        public static final String EXTRA_UCROP_COLOR_CONTROLS_WIDGET_ACTIVE = EXTRA_PREFIX + ".UcropColorControlsWidgetActive";
+        public static final String EXTRA_UCROP_COLOR_CONTROLS_WIDGET_ACTIVE = EXTRA_PREFIX
+                + ".UcropColorControlsWidgetActive";
 
         public static final String EXTRA_UCROP_WIDGET_COLOR_TOOLBAR = EXTRA_PREFIX + ".UcropToolbarWidgetColor";
         public static final String EXTRA_UCROP_TITLE_TEXT_TOOLBAR = EXTRA_PREFIX + ".UcropToolbarTitleText";
@@ -308,11 +314,12 @@ public class UCrop {
         public static final String EXTRA_HIDE_BOTTOM_CONTROLS = EXTRA_PREFIX + ".HideBottomControls";
         public static final String EXTRA_FREE_STYLE_CROP = EXTRA_PREFIX + ".FreeStyleCrop";
 
-        public static final String EXTRA_ASPECT_RATIO_SELECTED_BY_DEFAULT = EXTRA_PREFIX + ".AspectRatioSelectedByDefault";
+        public static final String EXTRA_ASPECT_RATIO_SELECTED_BY_DEFAULT = EXTRA_PREFIX
+                + ".AspectRatioSelectedByDefault";
         public static final String EXTRA_ASPECT_RATIO_OPTIONS = EXTRA_PREFIX + ".AspectRatioOptions";
 
-        public static final String EXTRA_UCROP_ROOT_VIEW_BACKGROUND_COLOR = EXTRA_PREFIX + ".UcropRootViewBackgroundColor";
-
+        public static final String EXTRA_UCROP_ROOT_VIEW_BACKGROUND_COLOR = EXTRA_PREFIX
+                + ".UcropRootViewBackgroundColor";
 
         private final Bundle mOptionBundle;
 
@@ -326,7 +333,8 @@ public class UCrop {
         }
 
         /**
-         * Set one of {@link android.graphics.Bitmap.CompressFormat} that will be used to save resulting Bitmap.
+         * Set one of {@link android.graphics.Bitmap.CompressFormat} that will be used
+         * to save resulting Bitmap.
          */
         public void setCompressionFormat(@NonNull Bitmap.CompressFormat format) {
             mOptionBundle.putString(EXTRA_COMPRESSION_FORMAT_NAME, format.name());
@@ -343,13 +351,14 @@ public class UCrop {
          * Choose what set of gestures will be enabled on each tab - if any.
          */
         public void setAllowedGestures(@UCropActivity.GestureTypes int tabScale,
-                                       @UCropActivity.GestureTypes int tabRotate,
-                                       @UCropActivity.GestureTypes int tabAspectRatio) {
-            mOptionBundle.putIntArray(EXTRA_ALLOWED_GESTURES, new int[]{tabScale, tabRotate, tabAspectRatio});
+                @UCropActivity.GestureTypes int tabRotate,
+                @UCropActivity.GestureTypes int tabAspectRatio) {
+            mOptionBundle.putIntArray(EXTRA_ALLOWED_GESTURES, new int[] { tabScale, tabRotate, tabAspectRatio });
         }
 
         /**
-         * This method sets multiplier that is used to calculate max image scale from min image scale.
+         * This method sets multiplier that is used to calculate max image scale from
+         * min image scale.
          *
          * @param maxScaleMultiplier - (minScale * maxScaleMultiplier) = maxScale
          */
@@ -367,7 +376,8 @@ public class UCrop {
         }
 
         /**
-         * Setter for max size for both width and height of bitmap that will be decoded from an input Uri and used in the view.
+         * Setter for max size for both width and height of bitmap that will be decoded
+         * from an input Uri and used in the view.
          *
          * @param maxBitmapSize - size in pixels
          */
@@ -383,14 +393,16 @@ public class UCrop {
         }
 
         /**
-         * @param isCircle - set it to true if you want dimmed layer to have an circle inside
+         * @param isCircle - set it to true if you want dimmed layer to have an circle
+         *                 inside
          */
         public void setCircleDimmedLayer(boolean isCircle) {
             mOptionBundle.putBoolean(EXTRA_CIRCLE_DIMMED_LAYER, isCircle);
         }
 
         /**
-         * @param show - set to true if you want to see a crop frame rectangle on top of an image
+         * @param show - set to true if you want to see a crop frame rectangle on top of
+         *             an image
          */
         public void setShowCropFrame(boolean show) {
             mOptionBundle.putBoolean(EXTRA_SHOW_CROP_FRAME, show);
@@ -411,7 +423,8 @@ public class UCrop {
         }
 
         /**
-         * @param show - set to true if you want to see a crop grid/guidelines on top of an image
+         * @param show - set to true if you want to see a crop grid/guidelines on top of
+         *             an image
          */
         public void setShowCropGrid(boolean show) {
             mOptionBundle.putBoolean(EXTRA_SHOW_CROP_GRID, show);
@@ -460,28 +473,32 @@ public class UCrop {
         }
 
         /**
-         * @param light true for light status bar (dark icons), false for dark status bar (light icons)
+         * @param light true for light status bar (dark icons), false for dark status
+         *              bar (light icons)
          */
         public void setStatusBarLight(boolean light) {
             mOptionBundle.putBoolean(EXTRA_STATUS_BAR_LIGHT, light);
         }
 
         /**
-         * @param light true for light navigation bar (dark icons), false for dark navigation bar (light icons)
+         * @param light true for light navigation bar (dark icons), false for dark
+         *              navigation bar (light icons)
          */
         public void setNavigationBarLight(boolean light) {
             mOptionBundle.putBoolean(EXTRA_NAVIGATION_BAR_LIGHT, light);
         }
 
         /**
-         * @param color - desired resolved color of the active and selected widget and progress wheel middle line (default is white)
+         * @param color - desired resolved color of the active and selected widget and
+         *              progress wheel middle line (default is white)
          */
         public void setActiveControlsWidgetColor(@ColorInt int color) {
             mOptionBundle.putInt(EXTRA_UCROP_COLOR_CONTROLS_WIDGET_ACTIVE, color);
         }
 
         /**
-         * @param color - desired resolved color of Toolbar text and buttons (default is darker orange)
+         * @param color - desired resolved color of Toolbar text and buttons (default is
+         *              darker orange)
          */
         public void setToolbarWidgetColor(@ColorInt int color) {
             mOptionBundle.putInt(EXTRA_UCROP_WIDGET_COLOR_TOOLBAR, color);
@@ -523,17 +540,21 @@ public class UCrop {
         }
 
         /**
-         * @param enabled - set to true to let user resize crop bounds (disabled by default)
+         * @param enabled - set to true to let user resize crop bounds (disabled by
+         *                default)
          */
         public void setFreeStyleCropEnabled(boolean enabled) {
             mOptionBundle.putBoolean(EXTRA_FREE_STYLE_CROP, enabled);
         }
 
         /**
-         * Pass an ordered list of desired aspect ratios that should be available for a user.
+         * Pass an ordered list of desired aspect ratios that should be available for a
+         * user.
          *
-         * @param selectedByDefault - index of aspect ratio option that is selected by default (starts with 0).
-         * @param aspectRatio       - list of aspect ratio options that are available to user
+         * @param selectedByDefault - index of aspect ratio option that is selected by
+         *                          default (starts with 0).
+         * @param aspectRatio       - list of aspect ratio options that are available to
+         *                          user
          */
         public void setAspectRatioOptions(int selectedByDefault, AspectRatio... aspectRatio) {
             if (selectedByDefault >= aspectRatio.length) {
@@ -542,11 +563,13 @@ public class UCrop {
                         selectedByDefault, aspectRatio.length));
             }
             mOptionBundle.putInt(EXTRA_ASPECT_RATIO_SELECTED_BY_DEFAULT, selectedByDefault);
-            mOptionBundle.putParcelableArrayList(EXTRA_ASPECT_RATIO_OPTIONS, new ArrayList<Parcelable>(Arrays.asList(aspectRatio)));
+            mOptionBundle.putParcelableArrayList(EXTRA_ASPECT_RATIO_OPTIONS,
+                    new ArrayList<Parcelable>(Arrays.asList(aspectRatio)));
         }
 
         /**
-         * @param color - desired background color that should be applied to the root view
+         * @param color - desired background color that should be applied to the root
+         *              view
          */
         public void setRootViewBackgroundColor(@ColorInt int color) {
             mOptionBundle.putInt(EXTRA_UCROP_ROOT_VIEW_BACKGROUND_COLOR, color);
@@ -565,7 +588,8 @@ public class UCrop {
         }
 
         /**
-         * Set an aspect ratio for crop bounds that is evaluated from source image width and height.
+         * Set an aspect ratio for crop bounds that is evaluated from source image width
+         * and height.
          * User won't see the menu with other ratios options.
          */
         public void useSourceImageAspectRatio() {
